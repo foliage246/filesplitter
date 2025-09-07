@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero bg-primary text-white py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold">File Splitter by Floweasy</h1>
+                <p class="lead">Split your CSV, TXT, and Excel files by any column with lightning speed. Perfect for data analysts, marketers, and businesses.</p>
+                {% if not current_user.is_authenticated %}
+                    <a href="{{ url_for('auth.signup') }}" class="btn btn-light btn-lg me-3">Start Free Trial</a>
+                    <a href="#features" class="btn btn-outline-light btn-lg">Learn More</a>
+                {% else %}
+                    <a href="{{ url_for('main.upload') }}" class="btn btn-light btn-lg">Start Splitting</a>
+                {% endif %}
+            </div>
+            <div class="col-lg-6">
+                <img src="https://via.placeholder.com/500x300/007bff/ffffff?text=File+Splitter" alt="File Splitter" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="py-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col">
+                <h2 class="display-5">Powerful Features</h2>
+                <p class="lead">Everything you need to split and organize your data files</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="bi bi-file-earmark-spreadsheet fs-1 text-primary mb-3"></i>
+                        <h5 class="card-title">Multiple Formats</h5>
+                        <p class="card-text">Support for CSV, TXT, and Excel files. Upload any data file and split it instantly.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="bi bi-diagram-3 fs-1 text-success mb-3"></i>
+                        <h5 class="card-title">Smart Splitting</h5>
+                        <p class="card-text">Split files by any column. Group your data automatically and download organized files.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="bi bi-download fs-1 text-info mb-3"></i>
+                        <h5 class="card-title">ZIP Download</h5>
+                        <p class="card-text">Get all split files in a single ZIP archive. Fast download and easy organization.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Section -->
+<section class="bg-light py-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col">
+                <h2 class="display-5">Simple Pricing</h2>
+                <p class="lead">Choose the plan that fits your needs</p>
+            </div>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-5">
+                <div class="card h-100 border-primary">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h4 class="mb-0">Free Plan</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <h3 class="text-primary">$0</h3>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">✓ 5 splits per day</li>
+                            <li class="mb-2">✓ Files up to 10MB</li>
+                            <li class="mb-2">✓ CSV, TXT, Excel support</li>
+                            <li class="mb-2">✓ ZIP download</li>
+                        </ul>
+                        {% if not current_user.is_authenticated %}
+                            <a href="{{ url_for('auth.signup') }}" class="btn btn-primary">Get Started Free</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="card h-100 border-success">
+                    <div class="card-header bg-success text-white text-center">
+                        <h4 class="mb-0">Premium Plan</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <h3 class="text-success">$9.99<span class="fs-6">/month</span></h3>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">✓ 100 splits per day</li>
+                            <li class="mb-2">✓ Files up to 100MB</li>
+                            <li class="mb-2">✓ All free features</li>
+                            <li class="mb-2">✓ Priority support</li>
+                        </ul>
+                        <button class="btn btn-success" disabled>Coming Soon</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5">
+    <div class="container text-center">
+        <h2 class="display-5 mb-4">Ready to Split Your Files?</h2>
+        <p class="lead mb-4">Join thousands of users who trust File Splitter for their data processing needs.</p>
+        {% if not current_user.is_authenticated %}
+            <a href="{{ url_for('auth.signup') }}" class="btn btn-primary btn-lg">Start Your Free Trial</a>
+        {% else %}
+            <a href="{{ url_for('main.upload') }}" class="btn btn-primary btn-lg">Go to Dashboard</a>
+        {% endif %}
+    </div>
+</section>
+
+{% if current_user.is_authenticated %}
+<!-- User Status -->
+<section class="bg-info text-white py-3">
+    <div class="container text-center">
+        <p class="mb-0">
+            Welcome back!
+            {% if current_user.is_premium %}
+                Premium User: 100 uses per day, up to 100MB files
+            {% else %}
+                Free User: 5 uses per day, up to 10MB files
+            {% endif %}
+        </p>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

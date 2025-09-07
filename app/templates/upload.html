@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2>Upload and Split File</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="file" class="form-label">Select File (CSV, TXT, Excel)</label>
+                <input type="file" class="form-control" id="file" name="file" required>
+            </div>
+            <div class="mb-3">
+                <label for="column" class="form-label">Column to Split By</label>
+                <input type="text" class="form-control" id="column" name="column" placeholder="Enter column name" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Split and Download</button>
+        </form>
+        <p class="mt-3 text-muted">
+            {% if current_user.is_premium %}
+                Premium: 100 uses/day, 100MB max
+            {% else %}
+                Free: 5 uses/day, 10MB max
+            {% endif %}
+        </p>
+    </div>
+</div>
+{% endblock %}
